@@ -6,8 +6,7 @@ echo "Downloading update"
 git pull origin main
 
 echo "Killing docker container"
-docker kill uischemes
-docker container rm uischemes
+docker ps --format '{{.Names}}' | grep -q '^uischemes$' && docker kill uischemes && docker container rm uischemes
 
 echo "Rebuilding docker container"
 docker build -t uis:latest .
