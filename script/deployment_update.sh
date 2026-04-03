@@ -44,10 +44,8 @@ else
 fi
 
 # ── 3. Build image ────────────────────────────────────────────────────────────
-step "Copying master key"
-cp ../uischemes_master_key ./config/master.key
 step "Building Docker image  ${DIM}(uis:latest)${RESET}"
-docker build -t uis:latest .
+docker build -t uis:latest --build-arg RAILS_MASTER_KEY="$(cat ../uischemes_master_key)" .
 ok "Image built successfully"
 
 # ── 4. Start container ────────────────────────────────────────────────────────
