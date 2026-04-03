@@ -8,3 +8,7 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+.purple_hover_bg:hover {
+  background-color: var(--color-brand-muted);
+}
