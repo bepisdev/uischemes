@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "indexedAt": 1775208221493,
+  "controllers": {
+    "hello": {
+      "filePath": "/Users/joshburns/Code/uischemes/app/javascript/controllers/hello_controller.js",
+      "targets": [],
+      "values": [],
+      "outlets": [],
+      "actions": [],
+      "classes": [],
+      "mtime": 1775208221039.311
+    }
+  }
+}
