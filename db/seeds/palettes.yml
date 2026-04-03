@@ -39,3 +39,135 @@
   text_hex:       "#657b83"
   tags:
     - Light
+
+- name: Nord
+  description: >-
+    An arctic, north-bluish colour palette by Arctic Ice Studio. Muted cool
+    tones inspired by the Scandinavian landscape — popular for editors,
+    terminals, and minimal UI work.
+  primary_hex:    "#88c0d0"
+  secondary_hex:  "#81a1c1"
+  accent_hex:     "#a3be8c"
+  background_hex: "#2e3440"
+  surface_hex:    "#3b4252"
+  text_hex:       "#eceff4"
+  tags:
+    - Dark
+    - Minimal
+
+- name: Dracula
+  description: >-
+    The iconic dark theme originally created for Vim by Zeno Rocha. Bold
+    purples, vivid greens, and hot pinks on a near-black canvas — endlessly
+    ported to every editor and terminal imaginable.
+  primary_hex:    "#bd93f9"
+  secondary_hex:  "#ff79c6"
+  accent_hex:     "#50fa7b"
+  background_hex: "#282a36"
+  surface_hex:    "#44475a"
+  text_hex:       "#f8f8f2"
+  tags:
+    - Dark
+    - Vibrant
+
+- name: Catppuccin Mocha
+  description: >-
+    The darkest flavour of the Catppuccin pastel theme family. Warm, low-
+    contrast dark tones with lavender and mauve accents that are easy on the
+    eyes during long sessions.
+  primary_hex:    "#cba6f7"
+  secondary_hex:  "#89b4fa"
+  accent_hex:     "#f38ba8"
+  background_hex: "#1e1e2e"
+  surface_hex:    "#313244"
+  text_hex:       "#cdd6f4"
+  tags:
+    - Dark
+    - Pastel
+
+- name: Gruvbox Dark
+  description: >-
+    A retro groove colour scheme with warm amber and earthy tones. Designed
+    for reduced eye strain with carefully chosen contrast ratios — a long-
+    time favourite among Vim and Neovim users.
+  primary_hex:    "#fabd2f"
+  secondary_hex:  "#83a598"
+  accent_hex:     "#fe8019"
+  background_hex: "#282828"
+  surface_hex:    "#3c3836"
+  text_hex:       "#ebdbb2"
+  tags:
+    - Dark
+
+- name: Tokyo Night
+  description: >-
+    Inspired by the neon glow and cool blues of a Tokyo night skyline. A
+    refined dark palette with deep navy backgrounds and vibrant blue-purple
+    accents — calm, focused, and modern.
+  primary_hex:    "#7aa2f7"
+  secondary_hex:  "#bb9af7"
+  accent_hex:     "#f7768e"
+  background_hex: "#1a1b26"
+  surface_hex:    "#24283b"
+  text_hex:       "#c0caf5"
+  tags:
+    - Dark
+    - Minimal
+
+- name: Monokai
+  description: >-
+    The classic Monokai colour scheme originally created for TextMate by
+    Wimer Hazenberg in 2006. High-contrast with vivid greens, oranges, and
+    pinks — one of the most replicated themes in editor history.
+  primary_hex:    "#66d9e8"
+  secondary_hex:  "#a6e22e"
+  accent_hex:     "#fd971f"
+  background_hex: "#272822"
+  surface_hex:    "#3e3d32"
+  text_hex:       "#f8f8f2"
+  tags:
+    - Dark
+    - Vibrant
+
+- name: Rose Piné
+  description: >-
+    Soho vibes for the ever-present neovim user. A dark, warm-toned palette
+    with dusty rose highlights and muted purples — elegant and introspective.
+  primary_hex:    "#c4a7e7"
+  secondary_hex:  "#ebbcba"
+  accent_hex:     "#eb6f92"
+  background_hex: "#191724"
+  surface_hex:    "#1f1d2e"
+  text_hex:       "#e0def4"
+  tags:
+    - Dark
+    - Pastel
+
+- name: GitHub Light
+  description: >-
+    The clean, familiar light theme used across GitHub's interface. Neutral
+    whites and greys anchored by GitHub's signature blue — professional,
+    accessible, and instantly recognisable.
+  primary_hex:    "#0969da"
+  secondary_hex:  "#6639ba"
+  accent_hex:     "#cf222e"
+  background_hex: "#ffffff"
+  surface_hex:    "#f6f8fa"
+  text_hex:       "#24292f"
+  tags:
+    - Light
+    - Minimal
+
+- name: Ayu Light
+  description: >-
+    A simple, bright, and elegant colour scheme for code. Warm off-whites
+    with saturated orange and teal accents — designed for clarity and long-
+    form reading comfort.
+  primary_hex:    "#ff9940"
+  secondary_hex:  "#55b4d4"
+  accent_hex:     "#f07171"
+  background_hex: "#fafafa"
+  surface_hex:    "#f3f4f5"
+  text_hex:       "#5c6166"
+  tags:
+    - Light
