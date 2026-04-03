@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "indexedAt": 1775208221493,
+  "indexedAt": 1775218977496,
   "controllers": {
     "hello": {
       "filePath": "/Users/joshburns/Code/uischemes/app/javascript/controllers/hello_controller.js",
@@ -10,6 +10,78 @@
       "actions": [],
       "classes": [],
       "mtime": 1775208221039.311
+    },
+    "color-picker": {
+      "filePath": "/Users/joshburns/Code/uischemes/app/javascript/controllers/color_picker_controller.js",
+      "targets": [
+        "picker",
+        "hex"
+      ],
+      "values": [],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "if",
+          "line": 13
+        },
+        {
+          "name": "pickerChanged",
+          "line": 18
+        },
+        {
+          "name": "hexChanged",
+          "line": 22
+        }
+      ],
+      "classes": [],
+      "mtime": 1775218977083.301
+    },
+    "tabs": {
+      "filePath": "/Users/joshburns/Code/uischemes/app/javascript/controllers/tabs_controller.js",
+      "targets": [
+        "tab",
+        "panel"
+      ],
+      "values": [],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "switch",
+          "line": 21
+        },
+        {
+          "name": "activate",
+          "line": 25
+        }
+      ],
+      "classes": [],
+      "mtime": 1775218977083.5557
+    },
+    "clipboard": {
+      "filePath": "/Users/joshburns/Code/uischemes/app/javascript/controllers/clipboard_controller.js",
+      "targets": [
+        "source",
+        "label"
+      ],
+      "values": [
+        {
+          "name": "text",
+          "type": "String"
+        }
+      ],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "copy",
+          "line": 13
+        },
+        {
+          "name": "if",
+          "line": 19
+        }
+      ],
+      "classes": [],
+      "mtime": 1775218977083.5554
     }
   }
 }
