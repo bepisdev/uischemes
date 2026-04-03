@@ -9,7 +9,7 @@
       <p class="text-xs text-[--color-text-muted]">Pick a base colour, mood, and harmony rule to generate a palette.</p>
     </div>
 
-    <%= form_with url: generate_path, method: :get, data: { controller: "color-picker" } do |f| %>
+    <%= form_with url: generate_path, method: :get, data: { controller: "color-picker randomize" } do |f| %>
 
       <%# Base colour %>
       <div class="flex flex-col gap-2">
@@ -19,6 +19,7 @@
             type="color"
             value="<%= @base_hex || '#7c6af7' %>"
             data-color-picker-target="picker"
+            data-randomize-target="picker"
             data-action="input->color-picker#pickerChanged"
             class="w-10 h-10 rounded-lg cursor-pointer border-0 bg-transparent p-0"
           >
@@ -30,6 +31,7 @@
             maxlength="7"
             spellcheck="false"
             data-color-picker-target="hex"
+            data-randomize-target="hex"
             data-action="input->color-picker#hexChanged"
             class="flex-1 px-3 py-2 rounded-lg border border-[--color-border] bg-[--color-canvas] text-sm font-mono text-[--color-text-base] placeholder:text-[--color-text-faint] focus:outline-none focus:ring-2 focus:ring-[--color-brand]"
           >
@@ -40,6 +42,7 @@
       <div class="flex flex-col gap-2">
         <label class="text-xs font-medium text-[--color-text-muted] uppercase tracking-wider">Mood</label>
         <select name="mood"
+          data-randomize-target="mood"
           class="px-3 py-2 rounded-lg border border-[--color-border] bg-[--color-canvas] text-sm text-[--color-text-base] focus:outline-none focus:ring-2 focus:ring-[--color-brand] appearance-none cursor-pointer">
           <% GenerateController::MOODS.each do |mood| %>
             <option value="<%= mood %>" <%= 'selected' if @mood == mood || (@mood.nil? && mood == 'dark') %>><%= mood.capitalize %></option>
@@ -51,6 +54,7 @@
       <div class="flex flex-col gap-2">
         <label class="text-xs font-medium text-[--color-text-muted] uppercase tracking-wider">Harmony</label>
         <select name="harmony"
+          data-randomize-target="harmony"
           class="px-3 py-2 rounded-lg border border-[--color-border] bg-[--color-canvas] text-sm text-[--color-text-base] focus:outline-none focus:ring-2 focus:ring-[--color-brand] appearance-none cursor-pointer">
           <% GenerateController::HARMONIES.each do |harmony| %>
             <option value="<%= harmony %>" <%= 'selected' if @harmony == harmony || (@harmony.nil? && harmony == 'monochromatic') %>><%= harmony.capitalize %></option>
@@ -63,6 +67,13 @@
         class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white transition-opacity duration-150 hover:opacity-90">
         <i data-lucide="wand-2" class="w-4 h-4"></i>
         Generate Palette
+      </button>
+
+      <button type="button"
+        data-action="click->randomize#randomize"
+        class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium border border-[--color-border] text-[--color-text-muted] hover:text-[--color-text-base] hover:border-[--color-brand-muted] transition-colors duration-150">
+        <i data-lucide="shuffle" class="w-4 h-4"></i>
+        Random
       </button>
 
     <% end %>
