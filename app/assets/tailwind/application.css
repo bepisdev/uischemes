@@ -1,1 +1,60 @@
 @import "tailwindcss";
+
+@theme {
+  /* Brand */
+  --color-brand:         oklch(0.65 0.22 280);
+  --color-brand-dim:     oklch(0.55 0.18 280);
+  --color-brand-muted:   oklch(0.65 0.22 280 / 12%);
+
+  /* Surfaces */
+  --color-canvas:        oklch(0.09 0.005 280);
+  --color-surface:       oklch(0.12 0.006 280);
+  --color-surface-raised:oklch(0.15 0.006 280);
+  --color-surface-hover: oklch(0.18 0.006 280);
+
+  /* Borders */
+  --color-border:        oklch(0.22 0.006 280);
+  --color-border-subtle: oklch(0.18 0.005 280);
+
+  /* Text */
+  --color-text-base:     oklch(0.92 0.005 280);
+  --color-text-muted:    oklch(0.60 0.008 280);
+  --color-text-faint:    oklch(0.40 0.006 280);
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-text-base);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-muted);
+    color: var(--color-brand);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: oklch(0.30 0.006 280);
+  }
+}
+

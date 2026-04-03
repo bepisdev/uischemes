@@ -1,0 +1,22 @@
+<%
+  nav_links = [
+    { label: "Home",    path: root_path,     icon: "layout-dashboard" },
+    { label: "Library", path: palettes_path, icon: "library" },
+    { label: "Generate",path: generate_path, icon: "wand-2" },
+  ]
+%>
+
+<nav class="flex flex-col w-60 shrink-0 border-r border-[--color-border] bg-[--color-surface] p-3 gap-0.5">
+  <p class="px-2 pt-1 pb-2 text-[11px] font-semibold tracking-widest uppercase text-[--color-text-faint]">
+    Navigation
+  </p>
+
+  <% nav_links.each do |link| %>
+    <% active = request.path == link[:path] %>
+    <%= link_to link[:path],
+          class: "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm font-medium transition-colors duration-150 #{active ? 'bg-[--color-brand-muted] text-[--color-brand]' : 'text-[--color-text-muted] hover:text-[--color-text-base] hover:bg-[--color-surface-hover]'}" do %>
+      <i data-lucide="<%= link[:icon] %>" class="w-4 h-4 shrink-0"></i>
+      <%= link[:label] %>
+    <% end %>
+  <% end %>
+</nav>

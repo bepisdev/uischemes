@@ -1,0 +1,81 @@
+<% content_for :title, "UISchemes — CSS Colour Palettes & Themes" %>
+
+<div class="px-8 py-12 max-w-5xl mx-auto">
+
+  <%# Hero %>
+  <div class="mb-16 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full text-xs font-medium border border-[--color-brand-muted] text-[--color-brand] bg-[--color-brand-muted]">
+      <i data-lucide="sparkles" class="w-3 h-3"></i>
+      For web designers &amp; developers
+    </div>
+
+    <h1 class="text-5xl font-bold tracking-tight text-[--color-text-base] mb-4 leading-tight">
+      Beautiful colour palettes<br>
+      <span class="text-[--color-brand]">for modern web design</span>
+    </h1>
+
+    <p class="text-lg text-[--color-text-muted] max-w-xl mx-auto mb-8">
+      Discover curated CSS colour palettes, generate custom themes, and export them in the format you need — CSS variables, Tailwind config, or JavaScript.
+    </p>
+
+    <div class="flex items-center justify-center gap-3 flex-wrap">
+      <%= link_to palettes_path,
+            class: "inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[--color-brand] text-white text-sm font-semibold hover:bg-[--color-brand-dim] transition-colors duration-150" do %>
+        <i data-lucide="library" class="w-4 h-4"></i>
+        Browse Library
+      <% end %>
+
+      <%= link_to generate_path,
+            class: "inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[--color-border] text-[--color-text-base] text-sm font-semibold hover:bg-[--color-surface-hover] hover:border-[--color-brand] transition-colors duration-150" do %>
+        <i data-lucide="wand-2" class="w-4 h-4"></i>
+        Start Generating
+      <% end %>
+    </div>
+  </div>
+
+  <%# Decorative swatch strip %>
+  <div class="flex gap-1 rounded-xl overflow-hidden mb-16 h-10 shadow-lg">
+    <% [
+      "oklch(0.65 0.22 280)", "oklch(0.60 0.22 260)", "oklch(0.58 0.20 240)",
+      "oklch(0.62 0.20 200)", "oklch(0.62 0.20 160)", "oklch(0.65 0.22 140)",
+      "oklch(0.68 0.20 100)", "oklch(0.70 0.20 60)",  "oklch(0.72 0.22 30)",
+      "oklch(0.68 0.22 10)",  "oklch(0.62 0.22 340)", "oklch(0.64 0.22 310)",
+    ].each do |color| %>
+      <div class="flex-1 h-full" style="background-color: <%= color %>;"></div>
+    <% end %>
+  </div>
+
+  <%# Feature cards %>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div class="flex flex-col gap-3 p-5 rounded-xl border border-[--color-border] bg-[--color-surface] hover:border-[--color-brand-muted] transition-colors duration-200">
+      <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[--color-brand-muted] text-[--color-brand]">
+        <i data-lucide="palette" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <h3 class="font-semibold text-[--color-text-base] mb-1">Curated Palettes</h3>
+        <p class="text-sm text-[--color-text-muted]">Handpicked colour combinations that work beautifully together, ready to drop into any project.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-3 p-5 rounded-xl border border-[--color-border] bg-[--color-surface] hover:border-[--color-brand-muted] transition-colors duration-200">
+      <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[--color-brand-muted] text-[--color-brand]">
+        <i data-lucide="wand-2" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <h3 class="font-semibold text-[--color-text-base] mb-1">Generate</h3>
+        <p class="text-sm text-[--color-text-muted]">Build custom palettes from a base colour. Adjust hue, saturation, and contrast to get exactly what you need.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-3 p-5 rounded-xl border border-[--color-border] bg-[--color-surface] hover:border-[--color-brand-muted] transition-colors duration-200">
+      <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[--color-brand-muted] text-[--color-brand]">
+        <i data-lucide="download" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <h3 class="font-semibold text-[--color-text-base] mb-1">Export Anywhere</h3>
+        <p class="text-sm text-[--color-text-muted]">Download your palette as CSS custom properties, a Tailwind config, or a JavaScript module. Use it your way.</p>
+      </div>
+    </div>
+  </div>
+
+</div>

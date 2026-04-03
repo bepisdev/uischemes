@@ -1,0 +1,47 @@
+<% content_for :title, "Palette Library — UISchemes" %>
+
+<div class="px-8 py-10 max-w-5xl mx-auto">
+
+  <%# Header %>
+  <div class="mb-8">
+    <h1 class="text-2xl font-bold tracking-tight text-[--color-text-base] mb-1">Palette Library</h1>
+    <p class="text-sm text-[--color-text-muted]">Browse and search curated CSS colour palettes.</p>
+  </div>
+
+  <%# Search & filter bar (placeholder) %>
+  <div class="flex items-center gap-3 mb-8">
+    <div class="relative flex-1 max-w-sm">
+      <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-[--color-text-faint]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </div>
+      <input
+        type="search"
+        placeholder="Search palettes…"
+        disabled
+        class="w-full pl-9 pr-4 py-2 rounded-lg border border-[--color-border] bg-[--color-surface] text-sm text-[--color-text-base] placeholder:text-[--color-text-faint] cursor-not-allowed opacity-50 focus:outline-none focus:ring-2 focus:ring-[--color-brand]"
+      >
+    </div>
+
+    <button
+      disabled
+      class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-[--color-border] bg-[--color-surface] text-sm text-[--color-text-muted] cursor-not-allowed opacity-50"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/>
+      </svg>
+      Filter
+    </button>
+  </div>
+
+  <%# Empty state %>
+  <div class="flex flex-col items-center justify-center py-24 rounded-xl border border-dashed border-[--color-border] text-center">
+    <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-[--color-surface-raised] mb-4 text-[--color-text-faint]">
+      <i data-lucide="library" class="w-6 h-6"></i>
+    </div>
+    <h3 class="text-sm font-semibold text-[--color-text-base] mb-1">No palettes yet</h3>
+    <p class="text-sm text-[--color-text-muted] max-w-xs">The library is empty for now. Palettes will appear here once they've been added.</p>
+  </div>
+
+</div>

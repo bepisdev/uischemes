@@ -1,0 +1,20 @@
+<header class="flex items-center justify-between h-14 px-4 border-b border-[--color-border] bg-[--color-surface] shrink-0 z-10">
+  <%# Logo %>
+  <%= link_to root_path, class: "flex items-center gap-2 group" do %>
+    <div class="flex items-center justify-center w-7 h-7 rounded-md bg-[--color-brand] text-white">
+      <i data-lucide="palette" class="w-4 h-4"></i>
+    </div>
+    <span class="text-sm font-semibold tracking-tight text-[--color-text-base] group-hover:text-[--color-brand] transition-colors duration-150">
+      uischemes
+    </span>
+  <% end %>
+
+  <%# Right side actions %>
+  <div class="flex items-center gap-1">
+    <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+       class="flex items-center justify-center w-8 h-8 rounded-md text-[--color-text-muted] hover:text-[--color-text-base] hover:bg-[--color-surface-hover] transition-colors duration-150"
+       aria-label="GitHub">
+      <i data-lucide="github" class="w-4 h-4"></i>
+    </a>
+  </div>
+</header>
