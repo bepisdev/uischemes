@@ -5,43 +5,91 @@
   <%# Header %>
   <div class="mb-8">
     <h1 class="text-2xl font-bold tracking-tight text-[--color-text-base] mb-1">Palette Library</h1>
-    <p class="text-sm text-[--color-text-muted]">Browse and search curated CSS colour palettes.</p>
+    <p class="text-sm text-[--color-text-muted]">Browse curated CSS colour palettes. Filter by tag to find the right style.</p>
   </div>
 
-  <%# Search & filter bar (placeholder) %>
-  <div class="flex items-center gap-3 mb-8">
-    <div class="relative flex-1 max-w-sm">
-      <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-[--color-text-faint]">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
+  <%# Tag filter pills %>
+  <div class="flex items-center gap-2 flex-wrap mb-8">
+    <%= link_to palettes_path,
+          class: "inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium transition-colors duration-150 #{@active_tag.nil? ? 'bg-[--color-brand] text-white' : 'border border-[--color-border] text-[--color-text-muted] hover:text-[--color-text-base] hover:border-[--color-brand-muted]'}" do %>
+      All
+    <% end %>
+
+    <% @tags.each do |tag| %>
+      <% is_active = @active_tag == tag.slug %>
+      <%= link_to palettes_path(tag: tag.slug),
+            class: "inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium transition-colors duration-150 #{is_active ? 'bg-[--color-brand] text-white' : 'border border-[--color-border] text-[--color-text-muted] hover:text-[--color-text-base] hover:border-[--color-brand-muted]'}" do %>
+        <%= tag.name %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if @palettes.any? %>
+    <%# Palette card grid %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <% @palettes.each do |palette| %>
+        <div class="flex flex-col rounded-xl border border-[--color-border] bg-[--color-surface] overflow-hidden hover:border-[--color-brand-muted] transition-colors duration-200">
+
+          <%# Colour swatch strip %>
+          <div class="flex h-16">
+            <% palette.colour_roles.each do |role, hex| %>
+              <div class="flex-1 h-full" style="background-color: <%= hex %>;" title="<%= role %>: <%= hex %>"></div>
+            <% end %>
+          </div>
+
+          <%# Card body %>
+          <div class="flex flex-col gap-3 p-4">
+            <div>
+              <h3 class="font-semibold text-[--color-text-base] text-sm mb-0.5"><%= palette.name %></h3>
+              <% if palette.description.present? %>
+                <p class="text-xs text-[--color-text-muted] leading-relaxed line-clamp-2"><%= palette.description %></p>
+              <% end %>
+            </div>
+
+            <%# Colour role pills %>
+            <div class="grid grid-cols-3 gap-1.5">
+              <% palette.colour_roles.each do |role, hex| %>
+                <div class="flex items-center gap-1.5 group">
+                  <div class="w-3 h-3 rounded-sm shrink-0 ring-1 ring-black/20" style="background-color: <%= hex %>;"></div>
+                  <div class="min-w-0">
+                    <p class="text-[10px] text-[--color-text-faint] capitalize leading-none mb-0.5"><%= role %></p>
+                    <p class="text-[10px] font-mono text-[--color-text-muted] truncate"><%= hex %></p>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+
+            <%# Tags %>
+            <% if palette.tags.any? %>
+              <div class="flex items-center gap-1.5 flex-wrap pt-1 border-t border-[--color-border-subtle]">
+                <% palette.tags.each do |tag| %>
+                  <%= link_to palettes_path(tag: tag.slug),
+                        class: "inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium border border-[--color-border] text-[--color-text-faint] hover:text-[--color-brand] hover:border-[--color-brand-muted] transition-colors duration-150" do %>
+                    <%= tag.name %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  <% else %>
+    <%# Empty / no-match state %>
+    <div class="flex flex-col items-center justify-center py-24 rounded-xl border border-dashed border-[--color-border] text-center">
+      <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-[--color-surface-raised] mb-4 text-[--color-text-faint]">
+        <i data-lucide="library" class="w-6 h-6"></i>
       </div>
-      <input
-        type="search"
-        placeholder="Search palettes…"
-        disabled
-        class="w-full pl-9 pr-4 py-2 rounded-lg border border-[--color-border] bg-[--color-surface] text-sm text-[--color-text-base] placeholder:text-[--color-text-faint] cursor-not-allowed opacity-50 focus:outline-none focus:ring-2 focus:ring-[--color-brand]"
-      >
+      <% if @active_tag %>
+        <h3 class="text-sm font-semibold text-[--color-text-base] mb-1">No palettes match this filter</h3>
+        <p class="text-sm text-[--color-text-muted] max-w-xs mb-4">Try a different tag or browse all palettes.</p>
+        <%= link_to "Clear filter", palettes_path, class: "text-xs text-[--color-brand] hover:underline" %>
+      <% else %>
+        <h3 class="text-sm font-semibold text-[--color-text-base] mb-1">No palettes yet</h3>
+        <p class="text-sm text-[--color-text-muted] max-w-xs">The library is empty. Palettes will appear here once they've been added.</p>
+      <% end %>
     </div>
-
-    <button
-      disabled
-      class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-[--color-border] bg-[--color-surface] text-sm text-[--color-text-muted] cursor-not-allowed opacity-50"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/>
-      </svg>
-      Filter
-    </button>
-  </div>
-
-  <%# Empty state %>
-  <div class="flex flex-col items-center justify-center py-24 rounded-xl border border-dashed border-[--color-border] text-center">
-    <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-[--color-surface-raised] mb-4 text-[--color-text-faint]">
-      <i data-lucide="library" class="w-6 h-6"></i>
-    </div>
-    <h3 class="text-sm font-semibold text-[--color-text-base] mb-1">No palettes yet</h3>
-    <p class="text-sm text-[--color-text-muted] max-w-xs">The library is empty for now. Palettes will appear here once they've been added.</p>
-  </div>
+  <% end %>
 
 </div>
