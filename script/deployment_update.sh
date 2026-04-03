@@ -7,7 +7,7 @@ git pull origin main
 
 echo "Killing docker container"
 docker kill uischemes
-docker rm uischemes
+docker container rm uischemes
 
 echo "Rebuilding docker container"
 docker build -t uis:latest .
