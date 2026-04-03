@@ -14,7 +14,8 @@
   <% nav_links.each do |link| %>
     <% active = request.path == link[:path] %>
     <%= link_to link[:path],
-          class: "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm font-medium transition-colors duration-150 #{active ? 'bg-[--color-brand-muted] text-[--color-brand]' : 'text-[--color-text-muted] hover:text-[--color-text-base] hover:bg-[--color-surface-hover]'}" do %>
+          class: "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm font-medium transition-colors duration-150 #{active ? 'text-white' : 'text-[--color-text-muted] hover:text-[--color-text-base] hover:bg-[--color-surface-hover]'}",
+          style: active ? "background-color: var(--color-brand);" : "" do %>
       <i data-lucide="<%= link[:icon] %>" class="w-4 h-4 shrink-0"></i>
       <%= link[:label] %>
     <% end %>
