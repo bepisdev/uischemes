@@ -21,4 +21,19 @@ class Palette < ApplicationRecord
       text:       text_hex
     }
   end
+
+  def to_css
+    lines = colour_roles.map { |role, hex| "  --color-#{role}: #{hex};" }
+    ":root {\n#{lines.join("\n")}\n}"
+  end
+
+  def to_tailwind_config
+    lines = colour_roles.map { |role, hex| "        #{role}: '#{hex}'," }
+    "module.exports = {\n  theme: {\n    extend: {\n      colors: {\n#{lines.join("\n")}\n      },\n    },\n  },\n}"
+  end
+
+  def to_js_module
+    lines = colour_roles.map { |role, hex| "  #{role}: '#{hex}'," }
+    "export const palette = {\n#{lines.join("\n")}\n};"
+  end
 end

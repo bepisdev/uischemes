@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "indexedAt": 1775218977496,
+  "indexedAt": 1775219702299,
   "controllers": {
     "hello": {
       "filePath": "/Users/joshburns/Code/uischemes/app/javascript/controllers/hello_controller.js",
@@ -82,6 +82,22 @@
       ],
       "classes": [],
       "mtime": 1775218977083.5554
+    },
+    "disclosure": {
+      "filePath": "/Users/joshburns/Code/uischemes/app/javascript/controllers/disclosure_controller.js",
+      "targets": [
+        "content"
+      ],
+      "values": [],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "toggle",
+          "line": 11
+        }
+      ],
+      "classes": [],
+      "mtime": 1775219701885.0312
     }
   }
 }
