@@ -23,6 +23,28 @@ palettes_data = [
     surface_hex:    "#14141f",
     text_hex:       "#e8e6f9",
     tags:           [ "Dark", "Minimal" ]
+  },
+  {
+    name:           "Solarized Dark",
+    description:    "The classic Solarized dark theme by Ethan Schoonover. Carefully balanced contrast with warm teal backgrounds and precise accent colours designed for long coding sessions.",
+    primary_hex:    "#268bd2",
+    secondary_hex:  "#2aa198",
+    accent_hex:     "#b58900",
+    background_hex: "#002b36",
+    surface_hex:    "#073642",
+    text_hex:       "#839496",
+    tags:           [ "Dark" ]
+  },
+  {
+    name:           "Solarized Light",
+    description:    "The light counterpart of Ethan Schoonover's Solarized palette. Warm cream backgrounds with the same precise accent set — maintains visual consistency across light and dark environments.",
+    primary_hex:    "#268bd2",
+    secondary_hex:  "#2aa198",
+    accent_hex:     "#b58900",
+    background_hex: "#fdf6e3",
+    surface_hex:    "#eee8d5",
+    text_hex:       "#657b83",
+    tags:           [ "Light" ]
   }
 ]
 
