@@ -44,6 +44,8 @@ else
 fi
 
 # ── 3. Build image ────────────────────────────────────────────────────────────
+step "Copying master key"
+cp ../uischemes_master_key ./config/master.key
 step "Building Docker image  ${DIM}(uis:latest)${RESET}"
 docker build -t uis:latest .
 ok "Image built successfully"
