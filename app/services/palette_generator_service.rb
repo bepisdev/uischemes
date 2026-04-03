@@ -1,8 +1,12 @@
 class PaletteGeneratorService
-  MOODS = %w[dark light pastel vibrant].freeze
-  HARMONIES = %w[monochromatic complementary analogous triadic].freeze
+  MOODS      = %w[dark light pastel vibrant].freeze
+  HARMONIES  = %w[monochromatic complementary analogous triadic].freeze
+  MAX_VARIATIONS = 5
 
   HEX_FORMAT = /\A#[0-9A-Fa-f]{6}\z/
+
+  # Hue step (degrees) between each variation
+  VARIATION_STEP = 20
 
   # Lightness bands per mood: [background_l, surface_l, text_l] as 0..100 floats
   MOOD_LIGHTNESS = {
@@ -12,15 +16,16 @@ class PaletteGeneratorService
     "vibrant"  => { bg: 12.0, surface: 18.0, text: 90.0 }
   }.freeze
 
-  def initialize(base_hex:, mood:, harmony:)
-    @base_hex = base_hex.to_s.strip
-    @mood     = mood.to_s.downcase
-    @harmony  = harmony.to_s.downcase
+  def initialize(base_hex:, mood:, harmony:, variations: 1)
+    @base_hex   = base_hex.to_s.strip
+    @mood       = mood.to_s.downcase
+    @harmony    = harmony.to_s.downcase
+    @variations = variations.to_i.clamp(1, MAX_VARIATIONS)
   end
 
   def call
     validate!
-    generate
+    generate_all
   end
 
   private
@@ -31,8 +36,23 @@ class PaletteGeneratorService
     raise ArgumentError, "Invalid harmony — must be one of: #{HARMONIES.join(', ')}"    unless HARMONIES.include?(@harmony)
   end
 
-  def generate
-    base_hsl = hex_to_hsl(@base_hex)
+  def generate_all
+    base_hue = hex_to_hsl(@base_hex)[:h]
+    @variations.times.map do |i|
+      shifted_hue = (base_hue + i * VARIATION_STEP) % 360
+      shifted_hex = hue_to_hex(shifted_hue, @base_hex)
+      generate(shifted_hex)
+    end
+  end
+
+  # Build a hex string that keeps the original saturation/lightness but uses the shifted hue
+  def hue_to_hex(new_hue, reference_hex)
+    original = hex_to_hsl(reference_hex)
+    hsl_to_hex(new_hue, original[:s], original[:l])
+  end
+
+  def generate(hex = @base_hex)
+    base_hsl = hex_to_hsl(hex)
     hue      = base_hsl[:h]
     sat      = base_hsl[:s].clamp(40.0, 100.0)
     bands    = MOOD_LIGHTNESS[@mood]

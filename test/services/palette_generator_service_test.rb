@@ -6,7 +6,7 @@ class PaletteGeneratorServiceTest < ActiveSupport::TestCase
   VALID_HEX = /\A#[0-9A-Fa-f]{6}\z/
 
   def generate(base_hex: "#268bd2", mood: "dark", harmony: "monochromatic")
-    PaletteGeneratorService.new(base_hex: base_hex, mood: mood, harmony: harmony).call
+    PaletteGeneratorService.new(base_hex: base_hex, mood: mood, harmony: harmony).call.first
   end
 
   # ── Output structure ─────────────────────────────────────────────────────────
@@ -193,5 +193,52 @@ class PaletteGeneratorServiceTest < ActiveSupport::TestCase
     first  = PaletteGeneratorService.new(**args).call
     second = PaletteGeneratorService.new(**args).call
     assert_equal first, second
+  end
+
+  # ── Variations ───────────────────────────────────────────────────────────────
+
+  test "call returns an array" do
+    result = PaletteGeneratorService.new(base_hex: "#268bd2", mood: "dark", harmony: "monochromatic").call
+    assert_kind_of Array, result
+  end
+
+  test "default variations is 1 and returns array of one palette" do
+    result = PaletteGeneratorService.new(base_hex: "#268bd2", mood: "dark", harmony: "monochromatic").call
+    assert_equal 1, result.size
+  end
+
+  test "returns correct number of palettes when variations specified" do
+    (1..PaletteGeneratorService::MAX_VARIATIONS).each do |n|
+      result = PaletteGeneratorService.new(base_hex: "#268bd2", mood: "dark", harmony: "monochromatic", variations: n).call
+      assert_equal n, result.size, "Expected #{n} palettes, got #{result.size}"
+    end
+  end
+
+  test "each variation is a valid six-role hash" do
+    result = PaletteGeneratorService.new(base_hex: "#268bd2", mood: "dark", harmony: "monochromatic", variations: 3).call
+    result.each_with_index do |palette, i|
+      assert_kind_of Hash, palette, "Variation #{i + 1} is not a Hash"
+      assert_equal %i[primary secondary accent background surface text], palette.keys
+      palette.each_value { |hex| assert_match VALID_HEX, hex }
+    end
+  end
+
+  test "variations clamp to MAX_VARIATIONS" do
+    result = PaletteGeneratorService.new(base_hex: "#268bd2", mood: "dark", harmony: "monochromatic", variations: 99).call
+    assert_equal PaletteGeneratorService::MAX_VARIATIONS, result.size
+  end
+
+  test "variations clamp to 1 for zero or negative values" do
+    [ 0, -3 ].each do |n|
+      result = PaletteGeneratorService.new(base_hex: "#268bd2", mood: "dark", harmony: "monochromatic", variations: n).call
+      assert_equal 1, result.size, "Expected 1 palette for variations=#{n}"
+    end
+  end
+
+  test "multiple variations produce different primaries" do
+    result = PaletteGeneratorService.new(base_hex: "#268bd2", mood: "vibrant", harmony: "monochromatic", variations: 3).call
+    primaries = result.map { |p| p[:primary] }
+    # Three hue-shifted palettes should not all be identical
+    assert primaries.uniq.size > 1, "Expected variations to differ, got: #{primaries.inspect}"
   end
 end
